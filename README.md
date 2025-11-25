@@ -1,62 +1,87 @@
 
-# Crescer Juntos – PRO (DRF + JWT + Swagger + CORS + Filtros + Paginação)
+# Backend limpo — projeto **crescer_juntos** (Django + PostgreSQL)
 
-Este backend conecta ao banco PostgreSQL já existente, gera models via `inspectdb`, cria API CRUD automaticamente e disponibiliza JWT, Swagger, CORS com credenciais, filtros, busca e ordenação, além de paginação.
+Este backend foi refeito do zero, limpo e pronto para rodar, usando Django 5, DRF e CORS.
+- **Projeto Django**: `crescer_juntos`
+- **App**: `main` (na pasta `main/`)
+- **Banco**: `crescer_juntos` (PostgreSQL)
+- **Usuário**: `damy` | **Senha**: `damy2109`
 
 ## Requisitos
-- Python 3.10+
+- Python 3.12+
 - PostgreSQL 13+
+- (Opcional) Docker e Docker Compose
 
-## Instalação (Windows)
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+## Configuração rápida (sem Docker)
+1. Crie e ative o virtualenv:
+   ```bash
+   python -m venv .venv && source .venv/bin/activate
+   ```
+2. Instale dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Crie `.env` a partir do exemplo:
+   ```bash
+   cp .env.example .env
+   ```
+4. Aplique migrações:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+5. Crie um superusuário (opcional):
+   ```bash
+   python manage.py createsuperuser
+   ```
+6. Suba o servidor de desenvolvimento:
+   ```bash
+   python manage.py runserver 0.0.0.0:8000
+   ```
+
+### Endpoints
+a) Healthcheck de banco: `GET /health/`  
+b) API base (DRF): `GET /api/` (lista de rotas)  
+c) CRUDs:
+- `usuarios`: `/api/usuarios/`
+- `trocas`: `/api/trocas/`
+- `plantas`: `/api/plantas/`
+- `imagens`: `/api/imagens/`
+- `mensagens`: `/api/mensagens/`
+- `avaliacao`: `/api/avaliacoes/`
+
+> Observação: O campo `senha` em `usuarios` não usa hashing (conforme seu esquema original). Em produção, recomendo usar autenticação do Django ou armazenar hash. 
+
+## Rodando com Docker
+1. Ajuste o `.env` (ou use `.env.example`).
+2. Suba os serviços:
+   ```bash
+   docker compose up --build
+   ```
+   - App: http://localhost:8000
+   - Postgres: porta 5432 exposta localmente
+
+## Variáveis de ambiente principais
+Veja `.env.example`.
+- `DJANGO_SECRET_KEY` (obrigatório em produção)
+- `DJANGO_DEBUG` ("1" ou "0")
+- `ALLOWED_HOSTS` (separados por vírgula)
+- `CORS_ALLOWED_ORIGINS` (separados por vírgula)
+- `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_HOST`, `POSTGRES_PORT`
+
+## Estrutura
 ```
-
-## Configurar `.env`
-```env
-DJANGO_SECRET_KEY=troque-este-segredo
-DJANGO_DEBUG=true
-DJANGO_ALLOWED_HOSTS=*
-PG_DB=crecer_juntos
-PG_USER=damy
-PG_PASSWORD=damy2109
-PG_HOST=localhost
-PG_PORT=5432
-
-# Liste origens do seu front para uso com credenciais (cookies/Authorization)
-# Ex.: http://localhost:3000,https://app.seudominio.com
-CORS_ALLOWED_ORIGINS=
-
-# Páginação por padrão
-API_PAGE_SIZE=20
+crescer_juntos_backend/
+├─ creser_juntos/        # projeto Django (settings/urls)
+│  ├─ settings.py, urls.py, asgi.py, wsgi.py
+├─ main/                 # app principal
+│  ├─ models.py, serializers.py, views.py, urls.py, admin.py
+│  └─ migrations/__init__.py
+├─ scripts/wait_for_db.py
+├─ manage.py
+├─ requirements.txt
+├─ Dockerfile
+├─ docker-compose.yml
+├─ pytest.ini
+└─ .env.example
 ```
-
-## Rodar
-```powershell
-python manage.py migrate
-python manage.py inspectdb_to_models
-python manage.py generate_api_from_models
-python manage.py createsuperuser
-python manage.py runserver 0.0.0.0:8000
-```
-
-## Endpoints úteis
-- Swagger: `GET /api/docs/`
-- Redoc: `GET /api/redoc/`
-- OpenAPI JSON: `GET /api/schema/`
-- JWT: `POST /api/auth/token/`, `POST /api/auth/token/refresh/`, `POST /api/auth/token/verify/`
-- CRUD: `/api/<tabela>/`
-  - Filtros: `?campo=valor`
-  - Busca: `?search=texto` (em campos textuais)
-  - Ordenação: `?ordering=campo` ou `?ordering=-campo`
-  - Paginação: `?page=2` (tamanho por `API_PAGE_SIZE`)
-
-## Produção (recomendações)
-- `DJANGO_DEBUG=false`
-- `DJANGO_ALLOWED_HOSTS` definido
-- Defina `CORS_ALLOWED_ORIGINS` com domínios do front e mantenha `CORS_ALLOW_CREDENTIALS=True`
-- SECRET_KEY forte e exclusivo
-- Considere ativar rotação e blacklist de refresh tokens no SimpleJWT
-- Restrinja permissões dos ViewSets conforme regras do negócio

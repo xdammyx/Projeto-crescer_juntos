@@ -1,6 +1,23 @@
-__pycache__/
-*.py[cod]
-venv/
+# --- Segurança ---
 .env
+.env.local
+
+# --- Python e Django ---
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+
+# --- Ambientes Virtuais ---
+.venv/
+venv/
+env/
+
+# --- Mídia e Estáticos ---
+media/
+staticfiles/
+
+# --- IDEs (Configurações do VSCode, etc) ---
 .vscode/
-*.sqlite3
+.idea/
+*.swp
