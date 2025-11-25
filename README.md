@@ -4,8 +4,8 @@
 Este backend foi refeito do zero, limpo e pronto para rodar, usando Django 5, DRF e CORS.
 - **Projeto Django**: `crescer_juntos`
 - **App**: `main` (na pasta `main/`)
-- **Banco**: `crescer_juntos` (PostgreSQL)
-- **Usuário**: `damy` | **Senha**: `damy2109`
+- **Banco**: `crescer_juntos` (seu banco)
+- **Usuário**: `damy` | **Senha**: `sua senha`
 
 ## Requisitos
 - Python 3.12+
