@@ -1,10 +1,17 @@
 
 # Backend limpo — projeto **crescer_juntos** (Django + PostgreSQL)
 
+<<<<<<< HEAD
 Este backend foi feito do zero, limpo e pronto para rodar, usando Django 5, DRF e CORS.
 - **Projeto Django**: `seu projeto`
 - **App**: `main` (na pasta `main/`)
 - **Banco**: `seu banco` (PostgreSQL)
+=======
+Este backend foi refeito do zero, limpo e pronto para rodar, usando Django 5, DRF e CORS.
+- **Projeto Django**: `seu projetos`
+- **App**: `main` (na pasta `main/`)
+- **Banco**: `seu banco de dados` (seu banco)
+>>>>>>> a8cf15a7e9f67a42c6e2254f5e0e44d29deb23a3
 - **Usuário**: `seu usuario` | **Senha**: `sua senha`
 
 ## Requisitos

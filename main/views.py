@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework import viewsets, permissions
 from .models import Usuario, Troca, Planta, Imagem, Mensagem, Avaliacao
 from .serializers import (
@@ -8,6 +9,17 @@ from .serializers import (
     MensagemSerializer, 
     AvaliacaoSerializer
 )
+
+# --- Health Check ---
+def health_check(request):
+    """
+    Função simples para verificar se o servidor está online.
+    Retorna Status 200 OK.
+    """
+    return JsonResponse({'status': 'OK', 'message': 'Servidor está rodando!'})
+
+
+# --- ViewSets ---
 
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()

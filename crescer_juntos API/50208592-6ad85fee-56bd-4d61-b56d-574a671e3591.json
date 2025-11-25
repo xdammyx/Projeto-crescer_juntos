@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "50208592-6ad85fee-56bd-4d61-b56d-574a671e3591",
+		"name": "crescer_juntos API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Healthcheck",
+			"id": "50208592-ce7514a0-3faa-4967-885f-645c7712363a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/health",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Usuário",
+			"id": "50208592-4f15d5c2-f64f-4ed0-99f1-67e521764b33",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nome\": \"Damaris\", \"email\": \"damaris@example.com\", \"senha\": \"minhasenha\", \"localizacao\": \"Camboriú/SC\"}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuários",
+			"id": "50208592-e94e2053-af0d-4069-92cf-fb840e43df16",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar uma Troca",
+			"id": "50208592-c211b246-37b2-4cf6-b3ef-b3d72f0be61a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nome_popular\": \"Costela-de-Adão\", \"tipo\": \"Ornamental\", \"origem\": \"América Central\", \"familia\": \"Araceae\", \"descricao\": \"Folhas grandes e recortadas\", \"imagem\": \"http://meu-site.com/foto.jpg\", \"id_usuario\": 1}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/plantas",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"plantas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Mensagem",
+			"id": "50208592-dd5ff560-66b9-4f6c-b484-7ae122a3e0c2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mensagem\": \"Olá! Vamos trocar mudas?\", \"id_usuario\": 1}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/mensagens",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mensagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Avaliação",
+			"id": "50208592-180ced5b-1311-450d-b6b5-4fb3897c23ab",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nota\": 9.5, \"comentario\": \"Ótima troca!\", \"id_avaliador\": 1, \"id_avaliado\": 2}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/avaliacoes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"avaliacoes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
