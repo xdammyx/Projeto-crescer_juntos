@@ -95,6 +95,18 @@
 			"response": []
 		},
 		{
+			"name": "Criar Planta",
+			"id": "50208592-8d7cc2f4-224c-435e-87ca-b5e5d4b854f0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
 			"name": "Criar uma Troca",
 			"id": "50208592-c211b246-37b2-4cf6-b3ef-b3d72f0be61a",
 			"protocolProfileBehavior": {
