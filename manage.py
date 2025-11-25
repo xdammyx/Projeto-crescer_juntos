@@ -2,9 +2,13 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv
 
 def main():
     """Run administrative tasks."""
+    # Carrega as variáveis de ambiente do arquivo .env antes de tudo
+    load_dotenv()
+
     # Define as configurações do projeto 'crescer_juntos'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crescer_juntos.settings')
     try:

@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url  # <--- Biblioteca para ler o banco da nuvem
 
 load_dotenv()
 
@@ -25,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Apps de terceiros
     'rest_framework',
-    'rest_framework.authtoken', # Necessário se usar TokenAuthentication
+    'rest_framework.authtoken',
     'corsheaders',
     # Seus apps
     'main',
@@ -33,8 +34,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # <--- ESSENCIAL PARA O DEPLOY
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # Cors deve vir antes do CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -63,7 +65,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'crescer_juntos.wsgi.application'
 ASGI_APPLICATION = 'crescer_juntos.asgi.application'
 
-# Configuração do Banco de Dados
+# --- CONFIGURAÇÃO DO BANCO DE DADOS ---
+# Padrão: Usa o Postgres local (do seu computador)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -76,14 +79,21 @@ DATABASES = {
     }
 }
 
-# --- IMPORTANTE ---
-# Comentei esta linha abaixo para NÃO quebrar o banco de dados atual.
-# Vamos usar o sistema OneToOne (vínculo) em vez de substituir o User padrão.
-# AUTH_USER_MODEL = 'main.Usuario'
+# Lógica de Deploy: Se existir DATABASE_URL (Nuvem), usa ela e ignora o local
+if os.getenv('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=True
+    )
+
+# --- FIM DB ---
 
 # Arquivos Estáticos (CSS, JS)
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Configuração do Whitenoise para comprimir e servir arquivos
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Arquivos de Media (Uploads de imagens das plantas)
 MEDIA_URL = '/media/'
@@ -99,18 +109,16 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser', # Essencial para upload de arquivos
+        'rest_framework.parsers.MultiPartParser',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        # Descomente abaixo se for implementar login por Token futuramente
         # 'rest_framework.authentication.TokenAuthentication', 
     ]
 }
 
-# Adiciona Browsable API apenas se estiver em DEBUG
 if DEBUG:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].append('rest_framework.renderers.BrowsableAPIRenderer')
 
