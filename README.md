@@ -97,6 +97,14 @@ POSTGRES_PORT=5432
 ```
 
 ---
+## 🎨 Diagramas do Banco de Dados
+
+### Conceitual
+![Diagrama Conceitual](docs/diagrama_conceitual.png)
+
+### Lógico
+![Diagrama Lógico](docs/modelo_logico.png)
+
 
 ## ▶️ Como Rodar o Projeto
 
