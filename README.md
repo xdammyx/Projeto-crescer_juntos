@@ -112,7 +112,7 @@ Crie um arquivo .env na raiz do projeto baseado no exemplo:
 
 ---
 
-## ⚙️ Configuração do Banco de Dados
+###  ⚙️ Configuração do Banco de Dados
 
 Crie um banco PostgreSQL e configure as variáveis no arquivo `.env`:
 ```
@@ -124,7 +124,7 @@ POSTGRES_PORT=5432
 ```
 
 ---
-## 🎨 Diagramas do Banco de Dados
+###  🎨 Diagramas do Banco de Dados
 
 ### Conceitual
 ![Diagrama Conceitual](docs/diagrama_conceitual.png)
