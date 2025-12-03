@@ -7,10 +7,10 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?style=for-the-badge&logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-24.0-2496ED?style=for-the-badge&logo=docker)
 
-> Este projeto é um backend desenvolvido com **Django** e banco de dados **PostgreSQL**, seguindo boas práticas de organização, arquitetura limpa e escalabilidade.
+## 📖 Descrição
+Este projeto é um backend desenvolvido com **Django** e banco de dados **PostgreSQL**, seguindo boas práticas de organização e escalabilidade.
 
-**Crescer Juntos** é uma API REST desenvolvida para gerenciar uma plataforma de troca de plantas e jardinagem colaborativa. O sistema conecta usuários que desejam trocar mudas, sementes e conhecimentos, promovendo a sustentabilidade.
-
+API REST desenvolvida para gerenciar uma plataforma de troca de plantas e jardinagem colaborativa. O sistema conecta usuários que desejam trocar mudas, sementes e conhecimentos, promovendo a sustentabilidade.
 ---
 
 ## 🚀 Funcionalidades
@@ -112,8 +112,7 @@ Crie um arquivo .env na raiz do projeto baseado no exemplo:
 
 ---
 
-###  ⚙️ Configuração do Banco de Dados
-
+## ⚙️ Configuração do Banco de Dados
 Crie um banco PostgreSQL e configure as variáveis no arquivo `.env`:
 ```
 POSTGRES_DB=crescer_juntos
@@ -124,13 +123,16 @@ POSTGRES_PORT=5432
 ```
 
 ---
-###  🎨 Diagramas do Banco de Dados
+
+## 🎨 Diagramas do Banco de Dados
 
 ### Conceitual
 ![Diagrama Conceitual](docs/diagrama_conceitual.png)
 
 ### Lógico
 ![Diagrama Lógico](docs/modelo_logico.png)
+
+---
 
 ## 🚀 Instalação e Configuração
 
@@ -239,9 +241,10 @@ Veja `.env.example`.
 - `DJANGO_SECRET_KEY` (obrigatório em produção)
 - `DJANGO_DEBUG` ("1" ou "0")
 - `ALLOWED_HOSTS` (separados por vírgula)
-- ## 🔐 Variáveis de Ambiente
 - `CORS_ALLOWED_ORIGINS` (separados por vírgula)
 - `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_HOST`, `POSTGRES_PORT`
+
+---
 
 ---
 
