@@ -101,22 +101,48 @@ POSTGRES_PORT=5432
 
 ## 🚀 Instalação e Configuração
 
+### 1️⃣ Clone o repositório
+```bash
+git clone https://github.com/xdammyx/Projeto-crescer_juntos
+cd crescer_juntos
+```
+
+### 2️⃣ Crie e ative o ambiente virtual
+
+- **Windows (PowerShell):**
+powershell
+python -m venv .venv
+.\.venv\Scripts\Activate
+
+- **Windows (CMD):**
+cmd
+python -m venv .venv
+.\.venv\Scripts\activate.bat
+
+- **Linux/Mac:**
+bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 3️⃣ Instale as dependências
+
+pip install -r requirements.txt
+
 ## ▶️ Como Rodar o Projeto ## 
 
-🚀 Instalação rápida (sem Docker)
-
 ### Rodar migrações
-```bash
+
 python manage.py migrate
 ```
 
 ### Criar superusuário
-```bash
+
 python manage.py createsuperuser
 ```
 
 ### Rodar servidor
-```bash
+
 python manage.py runserver
 ```
 ---
