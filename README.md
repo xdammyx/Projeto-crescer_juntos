@@ -74,7 +74,7 @@ Este projeto é um backend desenvolvido com **Django** e banco de dados **Postgr
 ```
 # ✅ Requisitos
 - Python 3.12+
-- PostgreSQL 13+(Obs? utilizei a versão 18)
+- PostgreSQL 13+(Obs:utilizei a versão 18)
 - (Opcional) Docker e Docker Compose
 
 ---
