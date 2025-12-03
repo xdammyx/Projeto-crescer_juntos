@@ -1,9 +1,11 @@
 # Crescer Juntos – Backend Limpo (Django + PostgreSQL)
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Python](https://img.shields.io/badge/python-3.11-blue)
-![Django](https://img.shields.io/badge/django-4.2-green)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
+![Python](https://img.shields.io/badge/python-3.12-blue?style=for-the-badge&logo=python)
+![Django](https://img.shields.io/badge/django-5.0-green?style=for-the-badge&logo=django)
+![PostgreSQL](https://img.shields.io/badge/postgresql-13+-blue?style=for-the-badge&logo=postgresql)
+![Docker](https://img.shields.io/badge/docker-ready-blue?style=for-the-badge&logo=docker)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 
 Este projeto é um backend desenvolvido com **Django** e banco de dados **PostgreSQL**, seguindo boas práticas de organização e escalabilidade.
 
@@ -63,34 +65,17 @@ Este projeto é um backend desenvolvido com **Django** e banco de dados **Postgr
 │   ├── views.py
 │   └── templates
 ├── postman
+│   └── crescer_juntos.postman_collection.json
 ├── scripts
 └── docs
     ├── diagrama_conceitual.png
     ├── estrutura_banco.sql
     └── modelo_logico.png
 ```
-
----
-
-## 🚀 Instalação e Configuração
-
-### 1️⃣ Clone o repositório
-```bash
-git clone https://github.com/xdammyx/Projeto-crescer_juntos
-cd crescer_juntos
-```
-
-### 2️⃣ Crie e ative o ambiente virtual
-```bash
-python -m venv .venv
-.\.venv\Scripts\Activate   # Windows
-source .venv/bin/activate  # Linux/Mac
-```
-
-### 3️⃣ Instale as dependências
-```bash
-pip install -r requirements.txt
-```
+# ✅ Requisitos
+- Python 3.12+
+- PostgreSQL 13+(Obs? utilizei a versão 18)
+- (Opcional) Docker e Docker Compose
 
 ---
 
@@ -114,8 +99,11 @@ POSTGRES_PORT=5432
 ### Lógico
 ![Diagrama Lógico](docs/modelo_logico.png)
 
+## 🚀 Instalação e Configuração
 
-## ▶️ Como Rodar o Projeto
+## ▶️ Como Rodar o Projeto ## 
+
+🚀 Instalação rápida (sem Docker)
 
 ### Rodar migrações
 ```bash
@@ -131,9 +119,7 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver
 ```
-
 ---
-
 ## 🐳 Deploy com Docker
 
 Este projeto possui suporte a **Docker** e **Docker Compose**.
@@ -153,19 +139,55 @@ docker exec -it crescer_juntos_web bash
 python manage.py migrate
 ```
 
+## 🔗 Endpoints principais
+- Healthcheck: `GET /health/`
+- API base (DRF): `GET /api/`
+- CRUDs:
+  - `usuarios`: `/api/usuarios/`
+  - `trocas`: `/api/trocas/`
+  - `plantas`: `/api/plantas/`
+  - `imagens`: `/api/imagens/`
+  - `mensagens`: `/api/mensagens/`
+  - `avaliacoes`: `/api/avaliacoes/`
+
+> Observação: O campo `senha` em `usuarios` não usa hashing (conforme seu esquema original). Em produção, recomendo usar autenticação do Django ou armazenar hash.
+
 ---
 
-## ✅ Testes
-```bash
-pytest
-```
+## 🧪 Testes com Postman
+Este projeto inclui uma coleção do **Postman** para testar os endpoints da API.
+
+### Como usar:
+1. Abra o Postman.
+2. Importe a coleção localizada em:
+   ```
+   /postman/crescer_juntos.postman_collection.json
+   ```
+3. Configure as variáveis de ambiente no Postman:
+   - `base_url`: http://localhost:8000
+   - `token`: (se necessário para autenticação)
+
+### Endpoints na coleção:
+- `GET /health/`
+- `GET /api/`
+- CRUDs: `/api/usuarios/`, `/api/trocas/`, `/api/plantas/`, `/api/imagens/`, `/api/mensagens/`, `/api/avaliacoes/`
 
 ---
 
-## 🔐 Variáveis de Ambiente
+## 🔐 Variáveis de ambiente principais
+Veja `.env.example`.
+- `DJANGO_SECRET_KEY` (obrigatório em produção)
+- `DJANGO_DEBUG` ("1" ou "0")
+- `ALLOWED_HOSTS` (separados por vírgula)
+- ## 🔐 Variáveis de Ambiente
 - `CORS_ALLOWED_ORIGINS` (separados por vírgula)
 - `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_HOST`, `POSTGRES_PORT`
 
+---
+
+## ✅ Testes automatizados
+```bash
+pytest
 ---
 
 ## 📄 Documentação
