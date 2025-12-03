@@ -259,8 +259,4 @@ pytest
 ## 📌 Observações
 - Projeto segue arquitetura limpa.
 
-✒️ Autor
-<table> <tr> <td align="center"> <a href="https://www.google.com/search?q=https://github.com/xdammyx"> <img src="https://www.google.com/search?q=https://github.com/xdammyx.png" width="100px;" alt="Foto de Perfil"/> <sub> <b>Damaris Elisangela Moreira</b> </sub> </a> </td> </tr> </table>
-- Configuração pronta para deploy com Docker.
-
 ✒️ Autor Damaris Elisangela Moreira
