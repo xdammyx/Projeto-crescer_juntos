@@ -11,22 +11,31 @@ Este projeto é um backend desenvolvido com **Django** e banco de dados **Postgr
 
 ## 📂 Estrutura do Projeto
 
-crescer_juntos/
-crescer_juntos/# Configurações globais do Django (settings, urls)
-docs/# Documentação e diagramas do Banco de Dados
-main/# Aplicação principal (Models, Views, Serializers)
-postman/# Coleções de teste da API (JSON)
-scripts/# Scripts auxiliares
-staticfiles/# Arquivos estáticos gerados pelo Whitenoise
-.env.example# Modelo das variáveis de ambiente
-.gitignore# Arquivos ignorados pelo Git
-docker-compose.yml# Orquestração dos containers (App + DB)
-Dockerfile# Receita para criar a imagem Docker da API
-manage.py# Gerenciador de comandos do Django
-pytest.ini# Configuração dos testes automatizados
-requirements.txt# Lista de dependências do projeto
+✅crescer_juntos/# Configurações globais do Django (settings, urls)
+
+✅docs/# Documentação e diagramas do Banco de Dados
+
+✅main/# Aplicação principal (Models, Views, Serializers)
+
+✅postman/# Coleções de teste da API (JSON) scripts/# Scripts auxiliares
+
+✅staticfiles/# Arquivos estáticos gerados pelo Whitenoise
+
+✅.env.example# Modelo das variáveis de ambiente
+
+✅.gitignore# Arquivos ignorados pelo Git
+
+✅docker-compose.yml# Orquestração dos containers (App + DB)
+
+✅Dockerfile# Receita para criar a imagem Docker da API
+
+✅manage.py# Gerenciador de comandos do Django
+
+✅pytest.ini# Configuração dos testes automatizados
+
+✅requirements.txt# Lista de dependências do projeto
 ```
-CRESCER_JUNTOS
+📂 CRESCER_JUNTOS
 ├── .env.example
 ├── .gitignore
 ├── docker-compose.yml
