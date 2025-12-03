@@ -21,18 +21,16 @@ API REST desenvolvida para gerenciar uma plataforma de troca de plantas e jardin
 - **💬 Chat:** Envio de mensagens entre usuários interessados na troca.
 - **⭐ Avaliações:** Sistema de notas e comentários para reputação dos usuários.
 - **❤️ Health Check:** Monitoramento de status da API.
-
 ---
 
-## 🛠️ Tecnologias Utilizadas
-
-- **Linguagem:** Python 3.12
-- **Framework:** Django 5 & Django REST Framework (DRF)
-- **Banco de Dados:** PostgreSQL (Versão 13+ / Testado na 18)
-- **Testes:** Pytest (Unitários/Integração) & Postman (E2E)
-- **Infraestrutura:** Docker, Docker Compose
-- **Servidor:** Gunicorn, Whitenoise
-- **Deploy:** Render.com
+## 🛠️ **Tecnologias**
+- 🐍 **Python** 3.12
+- 🌐 **Django 5 + DRF**
+- 🗄️ **PostgreSQL** 13+ (testado na 18)
+- 🧪 **Testes**: Pytest & Postman
+- 🐳 **Infraestrutura**: Docker, Docker Compose
+- 🚀 **Deploy**: Render.com
+---
 
 ## 📂 Estrutura do Projeto
 
@@ -94,26 +92,44 @@ API REST desenvolvida para gerenciar uma plataforma de troca de plantas e jardin
     ├── diagrama_conceitual.png
     ├── estrutura_banco.sql
     └── modelo_logico.png
+
 ```
 ## ⚙️ Pré-requisitos e Instalação
 
-### Requisitos
-- Python 3.12+
-- PostgreSQL 13+ (Projeto desenvolvido na versão 18)
-- Git
-- (Opcional) Docker e Docker Compose
-
-### 1️⃣ Clonar o repositório
-```bash
-git clone [https://github.com/xdammyx/Projeto-crescer_juntos](https://github.com/xdammyx/Projeto-crescer_juntos)
-cd crescer_juntos
-### 2️⃣ Configurar Variáveis de Ambiente
-Crie um arquivo .env na raiz do projeto baseado no exemplo:
+- ✅ Python 3.12+
+- ✅ PostgreSQL 13+
+- ✅ Git
+- ✅ (Opcional) Docker + Docker Compose
 
 ---
 
-## ⚙️ Configuração do Banco de Dados
-Crie um banco PostgreSQL e configure as variáveis no arquivo `.env`:
+## 🔧 **Instalação e Configuração**
+
+### 1️⃣ **Clone o repositório**
+```bash
+git clone https://github.com/xdammyx/Projeto-crescer_juntos.git
+cd crescer_juntos
+```
+
+2️⃣ Configurar Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto usando o arquivo de exemplo como base:
+
+cp .env.example .env
+
+---
+
+### 3️⃣ **Instale as dependências**
+```bash
+pip install -r requirements.txt
+```
+---
+
+### 4️⃣ **Configure as variáveis de ambiente**
+```bash
+cp .env.example .env
+```
+Edite o `.env`:
 ```
 POSTGRES_DB=crescer_juntos
 POSTGRES_USER=seu_usuario
@@ -124,15 +140,80 @@ POSTGRES_PORT=5432
 
 ---
 
-## 🎨 Diagramas do Banco de Dados
+## 🎨 **Diagramas do Banco de Dados**
 
-### Conceitual
+### 🧠 **Diagrama Conceitual**
 ![Diagrama Conceitual](docs/diagrama_conceitual.png)
 
-### Lógico
-![Diagrama Lógico](docs/modelo_logico.png)
+### 📐 **Modelo Lógico**
+![Modelo Lógico](docs/modelo_logico.png)
 
----
+
+### 🗄️ **Estrutura do Banco (SQL)**
+```sql
+-- Estrutura do banco de Dados
+-- Tabela USUARIOS
+CREATE TABLE usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nome VARCHAR(40) NOT NULL,
+    email VARCHAR(80) UNIQUE NOT NULL,
+    senha VARCHAR(15) NOT NULL,
+    localizacao VARCHAR(100),
+    data_cadastro DATE DEFAULT CURRENT_DATE
+);
+
+-- Tabela TROCAS
+CREATE TABLE trocas (
+    id_troca SERIAL PRIMARY KEY,
+    data DATE NOT NULL,
+    status VARCHAR(15),
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
+-- Tabela PLANTAS
+CREATE TABLE plantas (
+    id_planta SERIAL PRIMARY KEY,
+    nome_popular VARCHAR(40),
+    tipo VARCHAR(40),
+    origem VARCHAR(80),
+    familia VARCHAR(50),
+    descricao TEXT,
+    imagem VARCHAR(150),
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
+-- Tabela IMAGENS
+CREATE TABLE imagens (
+    id_imagem SERIAL PRIMARY KEY,
+    url_imagem VARCHAR(150) NOT NULL,
+    id_planta INT NOT NULL,
+    FOREIGN KEY (id_planta) REFERENCES plantas(id_planta) ON DELETE CASCADE
+);
+
+-- Tabela MENSAGENS
+CREATE TABLE mensagens (
+    id_chat SERIAL PRIMARY KEY,
+    mensagem TEXT NOT NULL,
+    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
+-- Tabela AVALIACAO
+CREATE TABLE avaliacao (
+    id_avaliacao SERIAL PRIMARY KEY,
+    nota DECIMAL(3,1) CHECK (nota >= 0 AND nota <= 10),
+    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    comentario TEXT,
+    id_avaliador INT NOT NULL,
+    id_avaliado INT NOT NULL,
+    FOREIGN KEY (id_avaliador) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_avaliado) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+);
+
+```
 
 ## 🚀 Instalação e Configuração
 
@@ -163,43 +244,51 @@ source .venv/bin/activate
 ### 3️⃣ Instale as dependências
 
 pip install -r requirements.txt
-
 ## ▶️ Como Rodar o Projeto ## 
-
-### Rodar migrações
-
+## ▶️ **Rodar o Projeto**
+```bash
 python manage.py migrate
-```
-
-### Criar superusuário
-
 python manage.py createsuperuser
-```
-
-### Rodar servidor
-
 python manage.py runserver
 ```
-Acesse a API em: http://127.0.0.1:8000/api/
+Acesse: **http://127.0.0.1:8000/api/**
+
 ---
-## 🐳 Deploy com Docker
 
-Este projeto possui suporte a **Docker** e **Docker Compose**.
+## 🐳 **Deploy com Docker**
 
-### 1️⃣ Build e subir os containers
-```bash
+### ✅ **Windows (PowerShell ou CMD)**
+1. **Subir containers**:
+```powershell
 docker-compose up --build
 ```
 
-### 2️⃣ Acessar o container
-```bash
+2. **Acessar container**:
+```powershell
 docker exec -it crescer_juntos_web bash
 ```
 
-### 3️⃣ Rodar migrações dentro do container
+3. **Rodar migrações dentro do container**:
 ```bash
 python manage.py migrate
 ```
+
+> **Dica para Windows:** Se ocorrer erro de permissão, execute:
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+---
+
+### ✅ **Linux/Mac**
+```bash
+docker-compose up --build
+docker exec -it crescer_juntos_web bash
+python manage.py migrate
+```
+
+---
+
 
 ## 🔗 Endpoints principais
 - Healthcheck: `GET /health/`
@@ -253,8 +342,13 @@ Veja `.env.example`.
 pytest
 ---
 
+
 ## 📄 Documentação
-- Diagramas e modelos estão na pasta `docs/`.
+- Diagramas e modelos estão na pasta `docs/`:
+  - `diagrama_conceitual.png` → diagrama conceitual
+  - `modelo_logico.png` → Modelo lógico
+  - `estrutura_banco.sql` → Script SQL do banco
+
 - Coleção do Postman disponível em `postman/`.
 
 ---
