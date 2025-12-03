@@ -1,15 +1,38 @@
 # Crescer Juntos – Backend Limpo (Django + PostgreSQL)
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
-![Python](https://img.shields.io/badge/python-3.12-blue?style=for-the-badge&logo=python)
-![Django](https://img.shields.io/badge/django-5.0-green?style=for-the-badge&logo=django)
-![PostgreSQL](https://img.shields.io/badge/postgresql-13+-blue?style=for-the-badge&logo=postgresql)
-![Docker](https://img.shields.io/badge/docker-ready-blue?style=for-the-badge&logo=docker)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+# 🌱 Crescer Juntos - API Backend
 
-Este projeto é um backend desenvolvido com **Django** e banco de dados **PostgreSQL**, seguindo boas práticas de organização e escalabilidade.
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
+![Django](https://img.shields.io/badge/Django-5.0-092E20?style=for-the-badge&logo=django)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-316192?style=for-the-badge&logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-24.0-2496ED?style=for-the-badge&logo=docker)
+
+> Este projeto é um backend desenvolvido com **Django** e banco de dados **PostgreSQL**, seguindo boas práticas de organização, arquitetura limpa e escalabilidade.
+
+**Crescer Juntos** é uma API REST desenvolvida para gerenciar uma plataforma de troca de plantas e jardinagem colaborativa. O sistema conecta usuários que desejam trocar mudas, sementes e conhecimentos, promovendo a sustentabilidade.
 
 ---
+
+## 🚀 Funcionalidades
+
+- **👤 Gerenciamento de Usuários:** Cadastro, perfil e localização.
+- **🌿 Catálogo de Plantas:** Cadastro detalhado com nome popular, científico, origem, família e fotos.
+- **🔄 Sistema de Trocas:** Solicitação e gerenciamento de status (*Pendente, Aceito, Recusado*).
+- **💬 Chat:** Envio de mensagens entre usuários interessados na troca.
+- **⭐ Avaliações:** Sistema de notas e comentários para reputação dos usuários.
+- **❤️ Health Check:** Monitoramento de status da API.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Linguagem:** Python 3.12
+- **Framework:** Django 5 & Django REST Framework (DRF)
+- **Banco de Dados:** PostgreSQL (Versão 13+ / Testado na 18)
+- **Testes:** Pytest (Unitários/Integração) & Postman (E2E)
+- **Infraestrutura:** Docker, Docker Compose
+- **Servidor:** Gunicorn, Whitenoise
+- **Deploy:** Render.com
 
 ## 📂 Estrutura do Projeto
 
@@ -72,10 +95,20 @@ Este projeto é um backend desenvolvido com **Django** e banco de dados **Postgr
     ├── estrutura_banco.sql
     └── modelo_logico.png
 ```
-# ✅ Requisitos
+## ⚙️ Pré-requisitos e Instalação
+
+### Requisitos
 - Python 3.12+
-- PostgreSQL 13+(Obs:utilizei a versão 18)
+- PostgreSQL 13+ (Projeto desenvolvido na versão 18)
+- Git
 - (Opcional) Docker e Docker Compose
+
+### 1️⃣ Clonar o repositório
+```bash
+git clone [https://github.com/xdammyx/Projeto-crescer_juntos](https://github.com/xdammyx/Projeto-crescer_juntos)
+cd crescer_juntos
+### 2️⃣ Configurar Variáveis de Ambiente
+Crie um arquivo .env na raiz do projeto baseado no exemplo:
 
 ---
 
@@ -145,6 +178,7 @@ python manage.py createsuperuser
 
 python manage.py runserver
 ```
+Acesse a API em: http://127.0.0.1:8000/api/
 ---
 ## 🐳 Deploy com Docker
 
@@ -224,4 +258,9 @@ pytest
 
 ## 📌 Observações
 - Projeto segue arquitetura limpa.
+
+✒️ Autor
+<table> <tr> <td align="center"> <a href="https://www.google.com/search?q=https://github.com/xdammyx"> <img src="https://www.google.com/search?q=https://github.com/xdammyx.png" width="100px;" alt="Foto de Perfil"/> <sub> <b>Damaris Elisangela Moreira</b> </sub> </a> </td> </tr> </table>
 - Configuração pronta para deploy com Docker.
+
+✒️ Autor Damaris Elisangela Moreira
