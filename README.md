@@ -298,13 +298,17 @@ python manage.py migrate
 
 ## 🗄️ Banco de Dados & Diagramas
 
+
 ### 🧠 **Modelo Conceitual**
+
 ![Diagrama Conceitual](docs/diagrama_conceitual.png)
 
 ### 📐 **Modelo Lógico**
+
 ![Modelo Lógico](docs/modelo_logico.png)
 
 ### 🗄️ **Estrutura do Banco (SQL)**
+
 -- Tabela USUARIOS
 CREATE TABLE usuarios (
     id_usuario SERIAL PRIMARY KEY,
