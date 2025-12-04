@@ -344,16 +344,119 @@ pytest
 
 
 ## 📄 Documentação
+- Diagramas e modelos estão na pasta `docs/`.
+- Coleção do Postman disponível em `postman/`.
+
+---
+
+## 🐳 **Setup com Docker Compose e Gunicorn**
+
+Este projeto está preparado para rodar em containers usando **Docker Compose**, com suporte a **Gunicorn** para produção e um script que aguarda o banco de dados PostgreSQL estar pronto antes de iniciar o Django.
+
+### ✅ **Arquivos importantes**
+- **Dockerfile**: Configura a imagem do Django com Gunicorn.
+- **docker-compose.yml**: Orquestra os serviços `web` (Django) e `db` (PostgreSQL).
+- **scripts/wait_for_db.py**: Script que aguarda o banco estar disponível antes de rodar migrações e iniciar o servidor.
+
+### ✅ **Estrutura do Dockerfile**
+```dockerfile
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends     gcc     libpq-dev     && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app
+EXPOSE 8000
+CMD ["gunicorn", "crescer_juntos.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+```
+
+### ✅ **Estrutura do docker-compose.yml**
+```yaml
+version: '3.9'
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-crescer_juntos}
+      POSTGRES_USER: ${POSTGRES_USER:-seu usuario}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sua senha}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: bash -c "python scripts/wait_for_db.py && python manage.py migrate && gunicorn crescer_juntos.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+```
+
+### ✅ **Script wait_for_db.py**
+```python
+import os
+import time
+import psycopg2
+
+host = os.getenv('POSTGRES_HOST', 'localhost')
+port = int(os.getenv('POSTGRES_PORT', '5432'))
+db = os.getenv('POSTGRES_DB', 'seu banco')
+user = os.getenv('POSTGRES_USER', 'seu usuario')
+password = os.getenv('POSTGRES_PASSWORD', 'sua senha')
+
+for i in range(60):
+    try:
+        conn = psycopg2.connect(host=host, port=port, dbname=db, user=user, password=password)
+        conn.close()
+        print('Database is ready!')
+        break
+    except Exception as e:
+        print(f'Waiting for DB... ({i+1}/60) {e}')
+        time.sleep(1)
+else:
+    raise RuntimeError('Database not ready after waiting 60 seconds')
+```
+
+### ✅ **Passos para rodar com Docker Compose**
+1. **Build e subir containers**:
+```bash
+docker-compose up --build
+```
+
+2. **Verificar logs**:
+O serviço `web` vai aguardar o banco, aplicar migrações e iniciar o Gunicorn.
+
+3. **Acessar a aplicação**:
+```
+http://localhost:8000
+```
+
+4. **Rodar comandos dentro do container**:
+```bash
+docker exec -it crescer_juntos_web bash
+```
+
+---
+
+## 📄 Documentação
 - Diagramas e modelos estão na pasta `docs/`:
   - `diagrama_conceitual.png` → diagrama conceitual
   - `modelo_logico.png` → Modelo lógico
   - `estrutura_banco.sql` → Script SQL do banco
 
-- Coleção do Postman disponível em `postman/`.
-
----
 
 ## 📌 Observações
 - Projeto segue arquitetura limpa.
+- Configuração pronta para deploy com Docker.
 
 ✒️ Autor Damaris Elisangela Moreira
