@@ -335,13 +335,6 @@ Veja `.env.example`.
 
 ---
 
----
-
-## ✅ Testes automatizados
-```bash
-pytest
----
-
 
 ## 📄 Documentação
 - Diagramas e modelos estão na pasta `docs/`.
@@ -403,6 +396,7 @@ volumes:
 ```
 
 ### ✅ **Script wait_for_db.py**
+
 ```python
 import os
 import time
@@ -428,6 +422,7 @@ else:
 ```
 
 ### ✅ **Passos para rodar com Docker Compose**
+
 1. **Build e subir containers**:
 ```bash
 docker-compose up --build
@@ -445,10 +440,16 @@ http://localhost:8000
 ```bash
 docker exec -it crescer_juntos_web bash
 ```
+---
+
+## ✅ Testes automatizados
+```bash
+pytest
 
 ---
 
 ## 📄 Documentação
+
 - Diagramas e modelos estão na pasta `docs/`:
   - `diagrama_conceitual.png` → diagrama conceitual
   - `modelo_logico.png` → Modelo lógico
