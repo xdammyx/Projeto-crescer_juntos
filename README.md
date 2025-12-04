@@ -10,8 +10,6 @@
 ![CI](https://img.shields.io/badge/GitHub%20Actions-CI-blue)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-> **Resumo:** API REST para **troca de plantas e jardinagem colaborativa**, conectando usuários que desejam trocar mudas, sementes e conhecimentos, promovendo a sustentabilidade.
-
 ---
 
 ## 🧭 Sumário
@@ -40,7 +38,10 @@
 ---
 
 ## 📖 Descrição
-**Crescer Juntos** é um backend em **Django + Django REST Framework** com banco **PostgreSQL**, seguindo boas práticas de **arquitetura limpa**, **ambientes** e **documentação**.
+
+**Crescer Juntos** Crescer Juntos é um aplicativo de Economia Compartilhada para troca e comercialização de plantas ornamentais, hortaliças e medicinais.
+> **Resumo:** O desenvolvimento do backend para um aplicativo voltado à troca e comercialização de plantas ornamentais, hortaliças e medicinais, incentivando assim a jardinagem colaborativa.
+> A plataforma conecta usuários interessados em compartilhar ou vender mudas, sementes e conhecimentos, promovendo práticas sustentáveis e fortalecendo a comunidade verde.
 
 ---
 
@@ -78,76 +79,6 @@
 - ✅ (Opcional) Docker + Docker Compose
 
 ---
-## 🎨 **Diagramas do Banco de Dados**
-
-### 🧠 **Modelo Conceitual**
-![Diagrama Conceitual](docs/diagrama_conceitual.png)
-
-### 📐 **Modelo Lógico**
-![Modelo Lógico](docs/modelo_logico.png)
-
-### 🗄️ **Estrutura do Banco (SQL)**
--- Tabela USUARIOS
-CREATE TABLE usuarios (
-    id_usuario SERIAL PRIMARY KEY,
-    nome VARCHAR(40) NOT NULL,
-    email VARCHAR(80) UNIQUE NOT NULL,
-    senha VARCHAR(15) NOT NULL,
-    localizacao VARCHAR(100),
-    data_cadastro DATE DEFAULT CURRENT_DATE
-);
-
--- Tabela TROCAS
-CREATE TABLE trocas (
-    id_troca SERIAL PRIMARY KEY,
-    data DATE NOT NULL,
-    status VARCHAR(15),
-    id_usuario INT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
-);
-
--- Tabela PLANTAS
-CREATE TABLE plantas (
-    id_planta SERIAL PRIMARY KEY,
-    nome_popular VARCHAR(40),
-    tipo VARCHAR(40),
-    origem VARCHAR(80),
-    familia VARCHAR(50),
-    descricao TEXT,
-    imagem VARCHAR(150),
-    id_usuario INT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
-);
-
--- Tabela IMAGENS
-CREATE TABLE imagens (
-    id_imagem SERIAL PRIMARY KEY,
-    url_imagem VARCHAR(150) NOT NULL,
-    id_planta INT NOT NULL,
-    FOREIGN KEY (id_planta) REFERENCES plantas(id_planta) ON DELETE CASCADE
-);
-
--- Tabela MENSAGENS
-CREATE TABLE mensagens (
-    id_chat SERIAL PRIMARY KEY,
-    mensagem TEXT NOT NULL,
-    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    id_usuario INT NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
-);
-
--- Tabela AVALIACAO
-CREATE TABLE avaliacao (
-    id_avaliacao SERIAL PRIMARY KEY,
-    nota DECIMAL(3,1) CHECK (nota >= 0 AND nota <= 10),
-    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    comentario TEXT,
-    id_avaliador INT NOT NULL,
-    id_avaliado INT NOT NULL,
-    FOREIGN KEY (id_avaliador) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (id_avaliado) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
-);
-
 
 ## 🔧 Instalação (sem Docker)
 
@@ -296,19 +227,21 @@ python manage.py migrate
 
 ---
 
-## 🗄️ Banco de Dados & Diagramas
+## 🎨 Banco de Dados & Diagramas
 
+A documentação completa do banco encontra-se na pasta `docs/`.
 
 ### 🧠 **Modelo Conceitual**
-
 ![Diagrama Conceitual](docs/diagrama_conceitual.png)
 
 ### 📐 **Modelo Lógico**
-
 ![Modelo Lógico](docs/modelo_logico.png)
 
-### 🗄️ **Estrutura do Banco (SQL)**
+### 🗄️ **Estrutura do Banco (SQL)**  
+<details>
+  <summary><strong>🔻 Clique aqui para expandir o Script SQL</strong></summary>
 
+```sql
 -- Tabela USUARIOS
 CREATE TABLE usuarios (
     id_usuario SERIAL PRIMARY KEY,
@@ -370,6 +303,9 @@ CREATE TABLE avaliacao (
     FOREIGN KEY (id_avaliado) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
+```
+</details>
+
 **Schema (resumo):**
 - `usuarios(id_usuario, nome, email, senha, localizacao, data_cadastro)`
 - `trocas(id_troca, data, status, id_usuario)` (FK → `usuarios`)
@@ -379,6 +315,7 @@ CREATE TABLE avaliacao (
 - `avaliacao(id_avaliacao, nota, data_hora, comentario, id_avaliador, id_avaliado)` (FKs → `usuarios`)
 
 ---
+
 
 ## 🔑 Autenticação (Opcional)
 Escolha **um** dos métodos:
@@ -671,16 +608,6 @@ Variáveis de ambiente:
 
 ---
 
-## 🧾 Licença
-Este projeto está licenciado sob a **MIT License**. Crie um arquivo `LICENSE` com o texto da licença.
-
----
-
-## ✒️ Autoria
-**Damaris Elisangela Moreira**
-
----
-
 ### 🔧 Extras (opcional)
 - **Makefile** com atalhos:
 ```makefile
@@ -723,4 +650,12 @@ pytest
 - Projeto segue arquitetura limpa.
 - Configuração pronta para deploy com Docker.
 
-✒️ Autor Damaris Elisangela Moreira
+🐳 Setup com Docker
+Shelldocker-compose up --buildMostrar mais linhas
+
+
+🧾 Licença
+Este projeto está licenciado sob a MIT License.
+
+✒️ Autora
+Damaris Elisangela Moreira
