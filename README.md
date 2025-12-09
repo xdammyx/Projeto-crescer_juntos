@@ -628,7 +628,7 @@ docker-up:
 ### ✅ Pronto para Commit
 ```bash
 git add README.md
-git commit -m "docs: adiciona README profissional do projeto Crescer Juntos"
+git commit -m "docs: adiciona README do projeto Crescer Juntos"
 git push origin main
 ```
 
